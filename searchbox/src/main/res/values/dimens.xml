@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Default Distance-->
+    <dimen name="distance_small">5dp</dimen>
+    <dimen name="distance_normal">10dp</dimen>
+    <dimen name="distance_medium">15dp</dimen>
+    <dimen name="distance_large">20dp</dimen>
+    <dimen name="distance_xLarge">25dp</dimen>
+    <dimen name="distance_xxLarge">30dp</dimen>
+
+    <!--Default Text Size-->
+    <dimen name="textSize_smallest">8dp</dimen>
+    <dimen name="textSize_smaller">10dp</dimen>
+    <dimen name="textSize_small">12dp</dimen>
+    <dimen name="textSize_normal">14dp</dimen>
+    <dimen name="textSize_medium">16dp</dimen>
+    <dimen name="textSize_large">18dp</dimen>
+    <dimen name="textSize_xLarge">20dp</dimen>
+    <dimen name="textSize_xxLarge">22dp</dimen>
+
+
+</resources>
