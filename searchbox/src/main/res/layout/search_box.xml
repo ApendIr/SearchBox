@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="VectorDrawableCompat"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_search"
+        android:background="@color/black_transparent_20"
+        >
+    </LinearLayout>
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:orientation="horizontal"
+    android:gravity="right"
+    tools:ignore="MissingPrefix"
+    android:background="@color/white"
+    android:id="@+id/layout_search"
+    >
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="?attr/actionBarSize"
+        app:srcCompat="@drawable/ic_close"
+        android:id="@+id/btn_search_clear"
+        android:visibility="invisible"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/distance_normal"
+
+        />
+    <EditText
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:gravity="right|center_vertical"
+        android:textSize="@dimen/textSize_normal"
+        android:hint="@string/search"
+        android:textColor="@color/gray850"
+        android:id="@+id/edt_search"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:maxLines="1"
+        android:layout_marginRight="@dimen/distance_small"
+        />
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="?attr/actionBarSize"
+            app:srcCompat="@drawable/ic_search"
+        android:id="@+id/img_search"
+        android:layout_gravity="center"
+        />
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="?attr/actionBarSize"
+            app:srcCompat="@drawable/ic_back"
+            android:id="@+id/btn_search_back"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/distance_normal"
+        />
+</LinearLayout>
+
+
+</RelativeLayout>
