@@ -12,7 +12,7 @@ First add xml view :
         />
 then , add searchbox :
         
-     SearchBox  searchBox=(SearchBox)findViewById(R.id.search_box);
+     SearchBox searchBox=(SearchBox)findViewById(R.id.search_box);
      
       searchBox.textSearched(new OnTextSearchedListener() {
             @Override
