@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchBox.setVisibility(View.VISIBLE);
                 searchBox.openSearchBox();
             }
         });
@@ -36,24 +35,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextSearched(String Search) {
                 Toast.makeText(MainActivity.this,Search,Toast.LENGTH_LONG).show();
-                searchBox.setVisibility(View.GONE);
             }
         });
 
         searchBox.backButtonClick(new OnBackButtonClickListener() {
             @Override
             public void onBackButtonClicked(View view) {
-                searchBox.setVisibility(View.GONE);
+                searchBox.closeSearchBox();
             }
         });
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         if(searchBox.isOpen()) {
             searchBox.closeSearchBox();
-            searchBox.setVisibility(View.GONE);
         }else
             finish();
     }

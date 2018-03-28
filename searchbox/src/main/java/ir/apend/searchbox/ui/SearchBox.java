@@ -1,5 +1,6 @@
 package ir.apend.searchbox.ui;
 
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
+
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.inputmethod.EditorInfo;
@@ -25,15 +27,16 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ir.apend.searchbox.R;
 import ir.apend.searchbox.helper.DataBaseHelper;
+import ir.apend.searchbox.helper.GeneralHelper;
 import ir.apend.searchbox.listener.OnBackButtonClickListener;
 import ir.apend.searchbox.listener.OnTextSearchedListener;
 import ir.apend.searchbox.model.HistoryModel;
@@ -53,12 +56,13 @@ public class SearchBox extends RelativeLayout implements TextWatcher {
     public LinearLayout layoutSearch;
     private RecyclerView recyclerView;
     private HistoryAdapter historyAdapter;
+    private RelativeLayout parent;
 
     private List<HistoryModel> historyModels=new ArrayList<>();
     OnBackButtonClickListener onBackButtonClickListener;
     OnTextSearchedListener onTextSearchedListener;
 
-    boolean isOpen;
+    private boolean isOpen;
 
     public SearchBox(Context context) {
         super(context);
@@ -87,6 +91,7 @@ public class SearchBox extends RelativeLayout implements TextWatcher {
         btnClear=(ImageView)rootLayout.findViewById(R.id.btn_search_clear);
         imgSearch=(ImageView)rootLayout.findViewById(R.id.img_search);
         layoutSearch=(LinearLayout)rootLayout.findViewById(R.id.layout_search);
+        parent=(RelativeLayout)rootLayout.findViewById(R.id.parent);
 
         edtSearch=(EditText)rootLayout.findViewById(R.id.edt_search);
 
@@ -102,8 +107,8 @@ public class SearchBox extends RelativeLayout implements TextWatcher {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                closeSearchBox();
                 onBackButtonClickListener.onBackButtonClicked(view);
+                closeSearchBox();
             }
         });
         btnClear.setOnClickListener(new View.OnClickListener() {
@@ -146,8 +151,9 @@ public class SearchBox extends RelativeLayout implements TextWatcher {
 
     public void openSearchBox(){
         init();
-        YoYo.with(Techniques.SlideInLeft).duration(500).playOn(layoutSearch);
-        showKeyboard();
+        //YoYo.with(Techniques.SlideInLeft).duration(500).playOn(layoutSearch);
+        showSearchBox();
+        //showKeyboard();
         isOpen=true;
 
     }
@@ -161,10 +167,9 @@ public class SearchBox extends RelativeLayout implements TextWatcher {
 
     public void closeSearchBox(){
         isOpen=false;
-        edtSearch.getText().clear();
-        hideKeyboard();
-        btnClear.setVisibility(View.INVISIBLE);
-        imgSearch.setVisibility(View.VISIBLE);
+        hideSearchBox();
+        btnClear.setVisibility(GONE);
+        imgSearch.setVisibility(VISIBLE);
 
     }
 
@@ -193,31 +198,32 @@ public class SearchBox extends RelativeLayout implements TextWatcher {
         edtSearch.setHint(hint);
     }
 
-
-  /*  private void showSearchBox() {
+    private void showSearchBox() {
         if (GeneralHelper.isLollipopOrNewer()) {
-            searchBox.post(() -> {
+            layoutSearch.post(() -> {
                 // get the center for the clipping circle
                 int cx = getResources().getDimensionPixelSize(R.dimen.toolbar_item_size) / 2;
-                int cy = (searchBox.getTop() + searchBox.getBottom()) / 2;
+                int cy = (layoutSearch.getTop() + layoutSearch.getBottom()) / 2;
 
                 // get the final radius for the clipping circle
-                int dx = Math.max(cx, searchBox.getWidth() - cx);
-                int dy = Math.max(cy, searchBox.getHeight() - cy);
+                int dx = Math.max(cx, layoutSearch.getWidth() - cx);
+                int dy = Math.max(cy, layoutSearch.getHeight() - cy);
                 float finalRadius = (float) Math.hypot(dx, dy);
 
                 // Android native animator
-                Animator animator = ViewAnimationUtils.createCircularReveal(searchBox, cx, cy, 0, finalRadius);
+                Animator animator = ViewAnimationUtils.createCircularReveal(parent, cx, cy, 0, finalRadius);
                 animator.setInterpolator(new AccelerateDecelerateInterpolator());
                 animator.addListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationStart(Animator animation) {
-                        searchBox.setVisibility(View.VISIBLE);
+                        parent.setVisibility(VISIBLE);
+                        layoutSearch.setVisibility(View.VISIBLE);
+
                     }
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        showKeyboard(searchText);
+                        showKeyboard();
                     }
                 });
                 animator.setDuration(500);
@@ -227,31 +233,33 @@ public class SearchBox extends RelativeLayout implements TextWatcher {
             YoYo.with(Techniques.SlideInLeft).withListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationStart(Animator animation) {
-                    searchBox.setVisibility(View.VISIBLE);
+                    parent.setVisibility(VISIBLE);
+                    layoutSearch.setVisibility(View.VISIBLE);
+
                 }
-            }).duration(500).playOn(searchBox);
+            }).duration(500).playOn(parent);
         }
     }
 
-  private void hideSearchBox() {
+    private void hideSearchBox() {
         if (GeneralHelper.isLollipopOrNewer()) {
-            searchBox.post(() -> {
+            layoutSearch.post(() -> {
                 // get the center for the clipping circle
                 int cx = getResources().getDimensionPixelSize(R.dimen.toolbar_item_size) / 2;
-                int cy = (searchBox.getTop() + searchBox.getBottom()) / 2;
+                int cy = (layoutSearch.getTop() + layoutSearch.getBottom()) / 2;
 
                 // get the final radius for the clipping circle
-                float finalRadius = searchBox.getWidth();
+                float finalRadius = layoutSearch.getWidth();
 
                 // Android native animator
-                Animator animator = ViewAnimationUtils.createCircularReveal(searchBox, cx, cy, finalRadius, 0);
+                Animator animator = ViewAnimationUtils.createCircularReveal(parent, cx, cy, finalRadius, 0);
                 animator.setInterpolator(new AccelerateDecelerateInterpolator());
                 animator.addListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        edtSearch.setText("");
-                        searchBox.setVisibility(View.INVISIBLE);
                         hideKeyboard();
+                        edtSearch.setText("");
+                        parent.setVisibility(View.GONE);
                     }
                 });
                 animator.setDuration(500);
@@ -261,13 +269,14 @@ public class SearchBox extends RelativeLayout implements TextWatcher {
             YoYo.with(Techniques.SlideOutLeft).withListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
+                     hideKeyboard();
                     edtSearch.setText("");
-                    searchBox.setVisibility(View.INVISIBLE);
-                    hideKeyboard();
+                    parent.setVisibility(GONE);
                 }
-            }).duration(500).playOn(searchBox);
+            }).duration(500).playOn(parent);
         }
-    }*/
+    }
+
 
 
 }

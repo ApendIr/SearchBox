@@ -20,4 +20,6 @@
     <dimen name="textSize_xxLarge">22dp</dimen>
 
     <dimen name="row_search_box_history">40dp</dimen>
+    <dimen name="toolbar_item_size">45dp</dimen>
+
 </resources>

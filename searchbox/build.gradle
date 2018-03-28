@@ -20,6 +20,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -32,14 +36,23 @@ dependencies {
     compile "com.android.support:appcompat-v7:$support_version"
     compile "com.android.support:recyclerview-v7:$support_version"
 
+    compile 'com.google.guava:guava:23.3-android'
+
+
     //Gson
     compile 'com.google.code.gson:gson:2.6.2'
 
-    //yoyo
+    //animations
+    compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.easing:library:2.0@aar'
     compile 'com.daimajia.androidanimations:library:2.3@aar'
 
     //ormLite
     compile 'com.j256.ormlite:ormlite-android:4.48'
+
+    compile ('com.github.ozodrukh:CircularReveal:2.0.1@aar') {
+        transitive = true;
+    }
+
 
 }

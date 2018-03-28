@@ -28,11 +28,14 @@
                 />
 
     </android.support.v7.widget.Toolbar>
+
     <ir.apend.searchbox.ui.SearchBox
         android:layout_width="match_parent"
-        android:id="@+id/search_box"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:id="@+id/search_box"
         />
+
+
+
 
 </RelativeLayout>
