@@ -8,7 +8,6 @@ First add xml view :
         android:id="@+id/search_box"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         />
 then , add searchbox :
         
