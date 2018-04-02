@@ -198,7 +198,22 @@ public class SearchBox extends RelativeLayout implements TextWatcher {
         edtSearch.setHint(hint);
     }
 
+
     private void showSearchBox() {
+                    showKeyboard();
+                    parent.setVisibility(VISIBLE);
+                    layoutSearch.setVisibility(View.VISIBLE);
+    }
+
+    private void hideSearchBox() {
+                    hideKeyboard();
+                    edtSearch.setText("");
+                    parent.setVisibility(GONE);
+    }
+
+
+
+   /* private void showSearchBox() {
         if (GeneralHelper.isLollipopOrNewer()) {
             layoutSearch.post(() -> {
                 // get the center for the clipping circle
@@ -275,7 +290,7 @@ public class SearchBox extends RelativeLayout implements TextWatcher {
                 }
             }).duration(500).playOn(parent);
         }
-    }
+    }*/
 
 
 
