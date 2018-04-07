@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:ignore="VectorDrawableCompat"
     android:layout_marginRight="@dimen/distance_medium"
+    android:id="@+id/parent"
     >
 
     <LinearLayout

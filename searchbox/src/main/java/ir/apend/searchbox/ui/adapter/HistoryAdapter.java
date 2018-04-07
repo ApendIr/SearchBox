@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ import java.util.List;
 
 import ir.apend.searchbox.R;
 import ir.apend.searchbox.helper.DataBaseHelper;
+import ir.apend.searchbox.listener.OnTextSearchedListener;
 import ir.apend.searchbox.model.HistoryModel;
+import ir.apend.searchbox.ui.SearchBox;
 
 /**
  * Created by Fatemeh on 2/25/2018.
@@ -24,11 +27,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     private List<HistoryModel> historyModels=new ArrayList<>();
     private Context context;
     private LayoutInflater layoutInflater;
+    private OnTextSearchedListener onTextSearchedListener;
 
-    public HistoryAdapter(List<HistoryModel> historyModels, Context context){
+    public HistoryAdapter(List<HistoryModel> historyModels, Context context, OnTextSearchedListener onTextSearchedListener){
 
         this.historyModels=historyModels;
         this.context=context;
+        this.onTextSearchedListener=onTextSearchedListener;
 
     }
 
@@ -51,6 +56,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
                 notifyDataSetChanged();
             }
         });
+
+        holder.parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onTextSearchedListener.onTextSearched(historyModels.get(position).getTextHistory());
+            }
+        });
     }
 
     @Override
@@ -62,12 +74,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
        private ImageView btnDelete;
        private TextView txthistory;
+       private RelativeLayout parent;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             btnDelete=(ImageView)itemView.findViewById(R.id.btn_history_clear);
             txthistory=(TextView)itemView.findViewById(R.id.txt_search);
+            parent=(RelativeLayout)itemView.findViewById(R.id.parent);
         }
     }
 }

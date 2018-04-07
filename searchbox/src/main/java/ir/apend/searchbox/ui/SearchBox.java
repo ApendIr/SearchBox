@@ -101,7 +101,13 @@ public class SearchBox extends RelativeLayout implements TextWatcher {
         historyModels.clear();
         if(DataBaseHelper.getInstance(getContext()).getCountOfHistory()>0)
             historyModels=DataBaseHelper.getInstance(getContext()).getAllOrderHistory();
-        historyAdapter=new HistoryAdapter(historyModels,getContext());
+        historyAdapter=new HistoryAdapter(historyModels,getContext(), new OnTextSearchedListener() {
+            @Override
+            public void onTextSearched(String Search) {
+                onTextSearchedListener.onTextSearched(Search);
+                closeSearchBox();
+            }
+        });
         recyclerView.setAdapter(historyAdapter);
 
         btnBack.setOnClickListener(new View.OnClickListener() {

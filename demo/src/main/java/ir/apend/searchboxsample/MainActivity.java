@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         searchBox.textSearched(new OnTextSearchedListener() {
             @Override
             public void onTextSearched(String Search) {
-                Toast.makeText(MainActivity.this,Search,Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this,Search,Toast.LENGTH_SHORT).show();
             }
         });
 
