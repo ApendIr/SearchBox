@@ -1,6 +1,12 @@
 # SearchBox
 A beautiful and also simple searchbox for android!
 
+## Screenshots
+
+![screenshots](https://user-images.githubusercontent.com/35394143/38458022-cd1f62ca-3aad-11e8-9644-b324544d733b.gif)
+
+[Download Demo](https://github.com/ApendIr/SearchBox/blob/master/demo/release/demo-release.apk?raw=true)
+
 # Getting Started
 First add xml view :
 
